@@ -118,9 +118,11 @@ pvalue<-sum(binary)/B
   #confidence intervals for fleiss if number of judges are the same
   
   if (length(unique(rowSums(db)))==1) {
-    std.kappa<-sqrt(2/(tot*rowSums(db)[1]))
-    ci.low<-fleiss.kappa-qnorm(0.975)*std.kappa
+    std.kappa<-sqrt(2/(nrow(db)*(rowSums(db)[1]*(rowSums(db)[1]-1))))
+    ci.low<-fleiss.kappa-qnorm(0.975)*std.kappa #MODIFICA!#
     ci.upp<-fleiss.kappa+qnorm(0.975)*std.kappa
+    z.fleiss<-fleiss.kappa/std.kappa
+    pvalue.fleiss<-1-pnorm(z.fleiss)
       if (ci.upp>1 | ci.low<(-1/(rowSums(db)[1]-1))) {
         ci.low<-(1/(rowSums(db)[1]-1))
         ci.upp<-1
@@ -136,15 +138,24 @@ pvalue<-sum(binary)/B
       
       pvalue<-1-pchisq(stat.test,df=(nrow(db)*(ncol(db)-1)))
       
-      vet<-list(Lower=ci.low,Fleiss=fleiss.kappa,Upper=ci.upp,S=s,pvalue=pvalue)
+      vet<-list(Lower=ci.low,Fleiss=fleiss.kappa,Upper=ci.upp,
+                Std.err.Fleiss=std.kappa,Z.value=z.fleiss,
+                pvalue.Fleiss=pvalue.fleiss,
+                S=s,pvalue=pvalue)
       
       
-      cat(paste("Inter-rater Agreement"),"\n")
-      cat(paste(" Lower =",round(vet$Lower,3),"\n"))
-      cat(paste("Fleiss =",round(vet$Fleiss,3),"\n"))
-      cat(paste(" Upper =",round(vet$Upper,3),"\n"))
-      cat(paste("     S =",round(vet$S,3),"\n"))
-      cat(paste("pvalue =",round(vet$pvalue,5),"\n"))
+      cat(paste("Inter-rater Agreement using Fleiss'Kappa"),"\n")
+      cat(paste("        Lower =",round(vet$Lower,3),"\n"))
+      cat(paste("       Fleiss =",round(vet$Fleiss,3),"\n"))
+      cat(paste("        Upper =",round(vet$Upper,3),"\n"))
+      cat(paste("          Std =",round(vet$Std.err.Fleiss,3),"\n"))
+      cat(paste("            Z =",round(vet$Z.value,3),"\n"))
+      cat(paste("Fleiss.pvalue =",round(vet$pvalue.Fleiss,3),"\n"))
+      cat(paste(""),"\n")
+      cat(paste("Inter-rater Agreement using the S statistic"),"\n")
+      cat(paste("            S =",round(vet$S,3),"\n"))
+      cat(paste("       pvalue =",round(vet$pvalue,5),"\n"))
+      
       
       
       
@@ -157,14 +168,24 @@ pvalue<-sum(binary)/B
       bin<-stat.test>qnorm(1-alpha)
       pvalue<-1-pnorm(stat.test)
     
-      vet<-list(Lower=ci.low,Fleiss=fleiss.kappa,Upper=ci.upp,S=s,pvalue=pvalue)
+      vet<-list(Lower=ci.low,Fleiss=fleiss.kappa,Upper=ci.upp,
+                Std.err.Fleiss=std.kappa,Z.value=z.fleiss,
+                pvalue.Fleiss=pvalue.fleiss,
+                S=s,pvalue=pvalue)
       
-      cat(paste("Inter-rater Agreement"),"\n")
-      cat(paste(" Lower =",round(vet$Lower,3),"\n"))
-      cat(paste("Fleiss =",round(vet$Fleiss,3),"\n"))
-      cat(paste(" Upper =",round(vet$Upper,3),"\n"))
-      cat(paste("     S =",round(vet$S,3),"\n"))
-      cat(paste("pvalue =",round(vet$pvalue,5),"\n"))
+      cat(paste("Inter-rater Agreement using Fleiss'Kappa"),"\n")
+      cat(paste("        Lower =",round(vet$Lower,3),"\n"))
+      cat(paste("       Fleiss =",round(vet$Fleiss,3),"\n"))
+      cat(paste("        Upper =",round(vet$Upper,3),"\n"))
+      cat(paste("          Std =",round(vet$Std.err.Fleiss,3),"\n"))
+      cat(paste("            Z =",round(vet$Z.value,3),"\n"))
+      cat(paste("Fleiss.pvalue =",round(vet$pvalue.Fleiss,3),"\n"))
+      cat(paste(""),"\n")
+      cat(paste("Inter-rater Agreement using the S statistic"),"\n")
+      cat(paste("            S =",round(vet$S,3),"\n"))
+      cat(paste("       pvalue =",round(vet$pvalue,5),"\n"))
+      
+      
       
       
     }
@@ -219,14 +240,22 @@ binary<-c()
       }
 pvalue<-sum(binary)/B
 
-    vet<-list(Lower=ci.low,Fleiss=fleiss.kappa,Upper=ci.upp,S=s,pvalue=pvalue)
+        vet<-list(Lower=ci.low,Fleiss=fleiss.kappa,Upper=ci.upp,
+              Std.err.Fleiss=std.kappa,Z.value=z.fleiss,
+              pvalue.Fleiss=pvalue.fleiss,
+              S=s,pvalue=pvalue)
     
-    cat(paste("Inter-rater Agreement"),"\n")
-    cat(paste(" Lower =",round(vet$Lower,3),"\n"))
-    cat(paste("Fleiss =",round(vet$Fleiss,3),"\n"))
-    cat(paste(" Upper =",round(vet$Upper,3),"\n"))
-    cat(paste("     S =",round(vet$S,3),"\n"))
-    cat(paste("pvalue =",round(vet$pvalue,5),"\n"))
+        cat(paste("Inter-rater Agreement using Fleiss'Kappa"),"\n")
+        cat(paste("        Lower =",round(vet$Lower,3),"\n"))
+        cat(paste("       Fleiss =",round(vet$Fleiss,3),"\n"))
+        cat(paste("        Upper =",round(vet$Upper,3),"\n"))
+        cat(paste("          Std =",round(vet$Std.err.Fleiss,3),"\n"))
+        cat(paste("            Z =",round(vet$Z.value,3),"\n"))
+        cat(paste("Fleiss.pvalue =",round(vet$pvalue.Fleiss,3),"\n"))
+        cat(paste(""),"\n")
+        cat(paste("Inter-rater Agreement using the S statistic"),"\n")
+        cat(paste("            S =",round(vet$S,3),"\n"))
+        cat(paste("       pvalue =",round(vet$pvalue,5),"\n"))
 
   } 
     
@@ -248,3 +277,4 @@ pvalue<-sum(binary)/B
   
   
 }
+

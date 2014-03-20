@@ -1,18 +1,18 @@
 \name{concordance}
 \alias{concordance}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Inter rater agreement among a set of raters
+\title{Inter-rater agreement among a set of raters
 %%  ~~function to do ... ~~
 }
 \description{
-Computes a statistic as an index of inter rater agreement among a set of raters.  This procedure is based on a statistic not affected by \dQuote{Kappa} paradoxes.  
+Computes a statistic as an index of inter-rater agreement among a set of raters.  This procedure is based on a statistic not affected by \dQuote{Kappa} paradoxes.  
 It is also possible to evaluate if the agreement is nil using the test argument.
 The p value can be approximated using the Normal, Chi squared distribution or 
 using Monte Carlo algorithm.
 Normal approximation and Monte Carlo procedure can be calculated
 even though the number of observers is not the same for each evaluated subject.
-\sQuote{Fleiss} Kappa is also shown and its confidence interval is
-available when the number of observes is the same for each classified subject.
+\sQuote{Fleiss} Kappa is also shown and its confidence interval, standard error and pvalue using Normal approximation are
+available when the number of observes is the same for each classified subject and the test argument is specified.
 
 
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -38,10 +38,13 @@ concordance(db, test = "Default", B = 1000, alpha = 0.05)
 \value{
   A list containing the following components:
   \item{$Fleiss}{ \sQuote{Fleiss} Kappa index. }
-  \item{$S}{ Computed index of inter rater agreement not affected by Kappa paradoxes. }
+  \item{$Std}{ \sQuote{Fleiss} Kappa standard error. }
   \item{$Lower}{ Lower limit of \sQuote{Fleiss} Kappa confidence interval. It is computed only when the number of raters is the same for all subjects. }
-  \item{$Upper}{ Upper limit of \sQuote{Fleiss} Kappa confidence interval. It is computed only when the number of raters is the same for all subjects. }
-  \item{$pvalue}{ P value for the statistical test. }
+\item{$Upper}{ Upper limit of \sQuote{Fleiss} Kappa confidence interval. It is computed only when the number of raters is the same for all subjects. }
+  \item{$Z}{ \sQuote{Fleiss} Kappa Z value. It is calculated as the ratio between Fleiss kappa and Fleiss standard error }
+  \item{$Fleiss.pvalue}{ pvalue of Fleiss Kappa }
+  \item{$S}{ Computed index of inter-rater agreement not affected by Kappa paradoxes. }
+  \item{$pvalue}{ P value for the statistical test using the new statistic. }
   
   
 }
@@ -54,6 +57,7 @@ Falotico, R. Quatto, P. (2010). On avoiding paradoxes in assessing inter-rater a
 \author{
 Piero Quatto \email{piero.quatto@unimib.it},
 Daniele Giardiello \email{daniele.giardiello1@gmail.com}
+Stefano Vigliani \email{stefano.vigliani@izsler.it}
 }
 
 \examples{

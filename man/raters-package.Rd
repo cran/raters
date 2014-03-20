@@ -2,7 +2,7 @@
 \alias{raters-package}
 \alias{raters}
 \title{
-Inter rater agreement among a set of raters
+Inter-rater agreement among a set of raters
 
 }
 \description{
@@ -16,16 +16,16 @@ using Monte Carlo algorithm. Fleiss' Kappa is also shown.
 \tabular{ll}{
 Package: \tab raters\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2014-01-31\cr
+Version: \tab 1.1\cr
+Date: \tab 2014-03-20\cr
 License: \tab GPL-2\cr
 }
 
 }
 \author{
-Piero Quatto, Daniele Giardiello
+Daniele Giardiello, Piero Quatto and Stefano Vigliani
 
-Maintainer: Stefano Vigliani <stefano.vigliani@izlser.it>
+Maintainer: Daniele Giardiello <daniele.giardiello1@gmail.com>
 
 }
 \references{
