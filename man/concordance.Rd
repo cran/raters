@@ -1,18 +1,18 @@
 \name{concordance}
 \alias{concordance}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Inter-rater agreement among a set of raters
+\title{Inter-rater agreement among a set of raters for nominal data
 %%  ~~function to do ... ~~
 }
 \description{
-Computes a statistic as an index of inter-rater agreement among a set of raters.  This procedure is based on a statistic not affected by \dQuote{Kappa} paradoxes.  
-It is also possible to evaluate if the agreement is nil using the test argument.
-The p value can be approximated using the Normal, Chi squared distribution or 
-using Monte Carlo algorithm.
+Computes a statistic as an index of inter-rater agreement among a set of raters in case of nominal data.  This procedure is based on a statistic not affected by paradoxes of Kappa.  
+It is also possible to get the confidence interval at level alpha using the percentile Bootstrap and to evaluate if the agreement is nil using the test argument.
+The p value can be approximated using the Normal, Chi squared distribution or using Monte Carlo algorithm.
 Normal approximation and Monte Carlo procedure can be calculated
 even though the number of observers is not the same for each evaluated subject.
-\sQuote{Fleiss} Kappa is also shown and its confidence interval, standard error and pvalue using Normal approximation are
+Fleiss Kappa is also shown and its confidence interval, standard error and pvalue using Normal approximation are
 available when the number of observes is the same for each classified subject and the test argument is specified.
+The functions \code{wlin.conc} and \code{wquad.conc} can be used in case of ordinal data using linear or quadratic weight matrix, respectively.
 
 
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -29,22 +29,18 @@ concordance(db, test = "Default", B = 1000, alpha = 0.05)
   Monte Carlo test is useful for small samples even though the higher number of simulations, the more time the procedure takes.
   If test is not mentioned, no test will be computed. 
 }
-  \item{B}{ Number of iterations for Monte Carlo test.}   
-  \item{alpha}{ Level of significance.}
+  \item{B}{ Number of iterations for the percentile Bootstrap and for Monte Carlo test.}   
+  \item{alpha}{ Level of significance for Bootstrap confidence interval}
 
 }
 
 
 \value{
   A list containing the following components:
-  \item{$Fleiss}{ \sQuote{Fleiss} Kappa index. }
-  \item{$Std}{ \sQuote{Fleiss} Kappa standard error. }
-  \item{$Lower}{ Lower limit of \sQuote{Fleiss} Kappa confidence interval. It is computed only when the number of raters is the same for all subjects. }
-\item{$Upper}{ Upper limit of \sQuote{Fleiss} Kappa confidence interval. It is computed only when the number of raters is the same for all subjects. }
-  \item{$Z}{ \sQuote{Fleiss} Kappa Z value. It is calculated as the ratio between Fleiss kappa and Fleiss standard error }
-  \item{$Fleiss.pvalue}{ pvalue of Fleiss Kappa }
-  \item{$S}{ Computed index of inter-rater agreement not affected by Kappa paradoxes. }
-  \item{$pvalue}{ P value for the statistical test using the new statistic. }
+  \item{$Fleiss}{A list with Kappa of Fleiss index. When the number of raters is the same for every evaluated subject, the standard deviation, the Z Wald test and the p value are also shown.}
+
+  \item{$Statistic}{A list with the index of inter-rater agreement not affected by Kappa paradoxes and the percentile Bootstrap confidence interval. If the test argument is specified the value is also shown. }
+
   
   
 }
@@ -53,6 +49,7 @@ concordance(db, test = "Default", B = 1000, alpha = 0.05)
 Fleiss, J.L. (1971). Measuring nominal scale agreement among many raters. Psychological Bulletin \bold{76, 378-382}
 
 Falotico, R. Quatto, P. (2010). On avoiding paradoxes in assessing inter-rater agreement. Italian Journal of Applied Statistics \bold{22, 151-160}
+
 }
 \author{
 Piero Quatto \email{piero.quatto@unimib.it},
