@@ -20,9 +20,9 @@ data using linear or quadratic weights, respectively.
 \tabular{ll}{
 Package: \tab raters\cr
 Type: \tab Package\cr
-Version: \tab 2.0\cr
-Date: \tab 2014-12-24\cr
-License: \tab GPL-2\cr
+Version: \tab 2.0.1\cr
+Date: \tab 2014-12-29\cr
+License: \tab GPL(>=2)\cr
 }
 
 }

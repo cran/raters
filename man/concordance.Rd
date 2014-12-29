@@ -39,7 +39,7 @@ concordance(db, test = "Default", B = 1000, alpha = 0.05)
   A list containing the following components:
   \item{$Fleiss}{A list with Kappa of Fleiss index. When the number of raters is the same for every evaluated subject, the standard deviation, the Z Wald test and the p value are also shown.}
 
-  \item{$Statistic}{A list with the index of inter-rater agreement not affected by Kappa paradoxes and the percentile Bootstrap confidence interval. If the test argument is specified the value is also shown. }
+  \item{$Statistic}{A list with the index of inter-rater agreement not affected by Kappa paradoxes and the percentile Bootstrap confidence interval. If the test argument is specified the p value is also shown. }
 
   
   
