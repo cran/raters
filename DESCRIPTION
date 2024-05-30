@@ -7,9 +7,8 @@ Authors@R: c(person("Daniele", "Giardiello", role ="cre",
              person("Piero", "Quatto", role = "aut",
                     email = "piero.quatto@unimib.it"),
              person("Enrico", "Ripamonti", role = "aut"),
-             person("Stefano", "Vigliani", role = "ctb",
-		    email="stefano.vigliani@izsler.it"))
-Version: 2.0.3
+             person("Stefano", "Vigliani", role = "ctb"))
+Version: 2.0.4
 Author: Daniele Giardiello [cre],
   Piero Quatto [aut],
   Enrico Ripamonti [aut],
@@ -20,6 +19,6 @@ Description: The kappa statistic implemented by Fleiss is a very popular index f
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: no
-Packaged: 2023-08-19 15:54:11 UTC; danie
+Packaged: 2024-05-29 09:06:38 UTC; daniele.giardiello
 Repository: CRAN
-Date/Publication: 2023-08-19 16:10:05 UTC
+Date/Publication: 2024-05-30 03:20:02 UTC
