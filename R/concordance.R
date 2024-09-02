@@ -18,6 +18,7 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
   pe <- sum(pj2)
   fleiss.kappa <- (p - pe) / (1 - pe)
   s <- (C * p - 1) / (C - 1)
+  s.min <- (1/R * sum((sumrow - C) / (sumrow - 1) - 1))/ (C - 1)
   s.boot <- c()
   pi.v.boot <- replicate(B, pi.boot <- sample(pi,
                                               size = R,
@@ -28,8 +29,8 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
   s.boot.ci <- quantile(s.boot, probs = c(alpha / 2, 1 - alpha / 2))
 
   Default <- function(vet) {
-    s.vet <- c(s, s.boot.ci)
-    names(s.vet) <- c("S", "LCL", "UCL")
+    s.vet <- c(s, s.min, s.boot.ci)
+    names(s.vet) <- c("S", "min", "LCL", "UCL")
     vet <- list(Fleiss = fleiss.kappa, Statistic = s.vet)
     cat(paste("Inter-rater Agreement"), "\n")
     message("Fleiss kappa confidence intervals and test not estimated since the number of raters is not the same among evaluated subjects (n)")
@@ -40,8 +41,8 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
     stat.test <- s * R * sqrt((C - 1) / (2 * sum(1 / (sumrow * (sumrow - 1)))))
     bin <- stat.test > qnorm(1 - alpha)
     pvalue <- 1 - pnorm(stat.test)
-    s.vet <- c(s, s.boot.ci, pvalue)
-    names(s.vet) <- c("S", "LCL", "UCL", "pvalue")
+    s.vet <- c(s, s.min, s.boot.ci, pvalue)
+    names(s.vet) <- c("S", "min", "LCL", "UCL", "pvalue")
     vet <- list(Fleiss = fleiss.kappa, Statistic = s.vet)
     cat(paste("Inter-rater Agreement"), "\n")
     message("Fleiss kappa confidence intervals and test not estimated since the number of raters is not the same among evaluated subjects (n)")
@@ -79,8 +80,8 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
     crit.s.mc <- quantile(s.mc, 0.95)
     binary <- (s.mc >= s)
     pvalue <- sum(binary) / B
-    s.vet <- c(s, s.boot.ci, pvalue)
-    names(s.vet) <- c("S", "LCL", "UCL", "pvalue")
+    s.vet <- c(s, s.min, s.boot.ci, pvalue)
+    names(s.vet) <- c("S", "min", "LCL", "UCL", "pvalue")
     vet <- list(Fleiss = fleiss.kappa, Statistic = s.vet)
     cat(paste("Inter-rater Agreement"), "\n")
     message("Fleiss kappa confidence intervals and test not estimated since the number of raters is not the same among evaluated subjects (n)")
@@ -118,8 +119,8 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
         "Std.Error"
       )
 
-      s.vet <- c(s, s.boot.ci)
-      names(s.vet) <- c("S", "LCL", "UCL")
+      s.vet <- c(s, s.min, s.boot.ci)
+      names(s.vet) <- c("S", "min", "LCL", "UCL")
       vet <- list(Fleiss = kappa.vet, Statistic = s.vet)
       cat(paste("Inter-rater Agreement"), "\n")
       vet
@@ -145,8 +146,8 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
         "Z value",
         "Pr(>|z|)"
       )
-      s.vet <- c(s, s.boot.ci, pvalue)
-      names(s.vet) <- c("S", "LCL", "UCL", "pvalue")
+      s.vet <- c(s, s.min, s.boot.ci, pvalue)
+      names(s.vet) <- c("S", "min", "LCL", "UCL", "pvalue")
       vet <- list(Fleiss = kappa.vet, Statistic = s.vet)
       cat(paste("Inter-rater Agreement"), "\n")
       vet
@@ -172,8 +173,8 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
         "Z value",
         "Pr(>|z|)"
       )
-      s.vet <- c(s, s.boot.ci, pvalue)
-      names(s.vet) <- c("S", "LCL", "UCL", "pvalue")
+      s.vet <- c(s, s.min, s.boot.ci, pvalue)
+      names(s.vet) <- c("S", "min", "LCL", "UCL", "pvalue")
       vet <- list(Fleiss = kappa.vet, Statistic = s.vet)
       cat(paste("Inter-rater Agreement"), "\n")
       vet
@@ -225,8 +226,8 @@ concordance <- function(db, test = "Default", B = 1000, alpha = 0.05) {
         "Z value",
         "Pr(>|z|)"
       )
-      s.vet <- c(s, s.boot.ci, pvalue)
-      names(s.vet) <- c("S", "LCL", "UCL", "pvalue")
+      s.vet <- c(s, s.min, s.boot.ci, pvalue)
+      names(s.vet) <- c("S", "min", "LCL", "UCL", "pvalue")
       vet <- list(Fleiss = kappa.vet, Statistic = s.vet)
       cat(paste("Inter-rater Agreement"), "\n")
       vet

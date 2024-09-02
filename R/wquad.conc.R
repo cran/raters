@@ -32,13 +32,8 @@ wquad.conc <-
     pe <- (1 / (C^2)) * sum(w)
 
     s.star <- (p.avg - pe) / (1 - pe)
-
-    obj.min <- (row.sum - 2) / (row.sum - 1)
-    sum.obj.min <- sum(obj.min) * ((3 * C) / (2 * R))
-
-    min.s <- (sum.obj.min - 2 * C + 1) / (C + 1)
-
     s.star
+
     pi.boot.w <- list()
     for (i in 1:B) {
       pi.boot.w[[i]] <- sample(pi, size = nrow(db), replace = TRUE)
@@ -48,8 +43,8 @@ wquad.conc <-
     s.boot.ci.w <- quantile(s.boot.w, probs = c(alpha / 2, 1 - alpha / 2))
 
     Default <- function(db) {
-      s.res <- c(s.star, min.s, s.boot.ci.w)
-      names(s.res) <- c("S*", "min", "LCL", "UCL")
+      s.res <- c(s.star, s.boot.ci.w)
+      names(s.res) <- c("S*", "LCL", "UCL")
       s.res
     }
 
@@ -101,8 +96,8 @@ wquad.conc <-
       crit.s.mc <- quantile(s.star.mc, 0.95)
       binary <- s.star.mc >= s.star
       pvalue <- sum(binary) / B
-      s.res <- c(s.star, min.s, s.boot.ci.w, pvalue)
-      names(s.res) <- c("S*", "min", "LCL", "UCL", "pvalue")
+      s.res <- c(s.star, s.boot.ci.w, pvalue)
+      names(s.res) <- c("S*", "LCL", "UCL", "pvalue")
       s.res
     }
 
